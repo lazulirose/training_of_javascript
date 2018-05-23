@@ -140,3 +140,44 @@ observer.trigger("evening"); // Good morning
 
 //---------------------------------------------------------------------
 
+// 4. this
+// Base
+function Human(name) {
+    this.name = name;
+};
+Human.prototype.greet = function () {
+    console.log("Hello" + this.name);
+};
+var mike = new Human("Mike");
+mike.greet(); // Hello Mike
+
+// call
+function Human(name) {
+    this.name = name;
+};
+function greet (arg1, arg2) {
+    console.log(arg1 + this.name + arg2);
+};
+var mike = new Human("Mike");
+greet.call(mike, "Hello ", "!!"); // Hello Mike !!
+
+// apply
+function Human(name) {
+    this.name = name;
+};
+function greet (arg1, arg2) {
+    console.log(arg1 + this.name + arg2);
+};
+var mike = new Human("Mike");
+var greetMorning = greet.bind(mike);
+greet.apply(mike, ["Hello ", "!!"]); // Hello Mike !!
+// bind
+function Human(name) {
+    this.name = name;
+};
+function greet (arg1, arg2) {
+    console.log(arg1 + this.name + arg2);
+};
+var mike = new Human("Mike");
+var greetMorning = greet.bind(mike);
+greetMorning("Good morning ", "!!"); // Good morning Mike !!
